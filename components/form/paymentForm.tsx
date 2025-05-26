@@ -63,7 +63,7 @@ export default function PartnerOnboardingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
-
+      {/* Left Sidebar */}
       <div className="w-64 bg-slate-800 text-white flex-shrink-0">
         <div className="p-6">
           <h1 className="text-lg font-bold mb-8">OP-PARTNER MANAGEMENT</h1>
@@ -128,11 +128,11 @@ export default function PartnerOnboardingPage() {
 
         <main className="flex-1 p-4 md:px-8 md:py-8 overflow-y-auto">
           {currentStep === 6 && !showKYCForm && (
-            <div className="max-w-xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-8">Fund Withdraw Option</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                
+                {/* Bank Option Card */}
                 <Card
                   className={`cursor-pointer hover:shadow-lg transition-all border-2 ${
                     bankSelected ? "border-green-500 bg-green-50" : "hover:border-green-500"
@@ -145,16 +145,49 @@ export default function PartnerOnboardingPage() {
                         <Check className="w-4 h-4 text-white" />
                       </div>
                     )}
-                    <div className="inline-flex items-center space-x-2 bg-white border-2 border-green-500 rounded-lg px-4 py-3 shadow-sm">
-                            <div className="w-5 h-5 bg-gray-300  rounded-full flex items-center justify-center">
-                                <Check  className="w-3 h-3 text-white" />
-                            </div>
-                            <span className="font-medium text-gray-800">Bank</span>
-                            </div>
+                    <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                        <path
+                          fillRule="evenodd"
+                          d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Bank</h4>
+                    <p className="text-gray-600 text-sm">Transfer funds directly to your bank account</p>
                   </CardContent>
                 </Card>
 
-                
+                {/* Mobile Money Option Card */}
+                <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-green-500 opacity-50">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Mobile Money</h4>
+                    <p className="text-gray-600 text-sm">Receive funds via M-PESA or other mobile wallets</p>
+                    <span className="text-xs text-gray-500 mt-2 block">Coming Soon</span>
+                  </CardContent>
+                </Card>
+
+                {/* Cash Pickup Option Card */}
+                <Card className="cursor-pointer hover:shadow-lg transition-shadow border-2 hover:border-green-500 opacity-50">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4z" />
+                        <path d="M6 6a2 2 0 012-2h8a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V6zM8 8a1 1 0 011-1h6a1 1 0 110 2H9a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H9z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Cash Pickup</h4>
+                    <p className="text-gray-600 text-sm">Collect cash from designated pickup points</p>
+                    <span className="text-xs text-gray-500 mt-2 block">Coming Soon</span>
+                  </CardContent>
+                </Card>
               </div>
 
               <div className="flex justify-end gap-4">
@@ -251,12 +284,8 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
     accountNumber: "",
     proofOfBankAccount: null as File | null,
   })
-  const [errors, setErrors] = useState<Record<string, string>>({
-    branchName: "Branch Name is required",
-    accountName: "Bank Account Name is required",
-    accountNumber: "Bank Account Number is required",
-    proofOfBankAccount: "Bank Account File is required",
-  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
 
   const banks = ["Commercial Bank of Ethiopia", "Awash Bank", "Dashen Bank", "Bank of Abyssinia"]
 
@@ -276,7 +305,14 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
+    setTouched((prev) => ({ ...prev, [field]: true }))
 
+    if (field === "bankName") {
+      setFormData((prev) => ({ ...prev, branchName: "" }))
+      setTouched((prev) => ({ ...prev, branchName: false }))
+    }
+
+    // Clear errors when user starts typing
     if (value.trim() !== "") {
       setErrors((prev) => {
         const newErrors = { ...prev }
@@ -286,9 +322,40 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
     }
   }
 
+  const validateAndShowErrors = () => {
+    const newErrors: Record<string, string> = {}
+
+    if (!formData.branchName) {
+      newErrors.branchName = "Branch Name is required"
+    }
+    if (!formData.accountName.trim()) {
+      newErrors.accountName = "Bank Account Name is required"
+    }
+    if (!formData.accountNumber) {
+      newErrors.accountNumber = "Bank Account Number is required"
+    } else if (!/^\d{8,20}$/.test(formData.accountNumber)) {
+      newErrors.accountNumber = "Account number must be 8-20 digits"
+    }
+    if (!formData.proofOfBankAccount) {
+      newErrors.proofOfBankAccount = "Bank Account File is required"
+    }
+
+    setErrors(newErrors)
+    setTouched({
+      branchName: true,
+      accountName: true,
+      accountNumber: true,
+      proofOfBankAccount: true,
+    })
+
+    return Object.keys(newErrors).length === 0
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (validateForm()) onComplete()
+    if (validateAndShowErrors()) {
+      onComplete()
+    }
   }
 
   return (
@@ -319,7 +386,6 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
                   {bank}
                 </option>
               ))}
-
             </select>
           </div>
 
@@ -329,7 +395,7 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
               value={formData.branchName}
               onChange={(e) => handleInputChange("branchName", e.target.value)}
               className={`w-full h-12 px-3 border rounded-lg focus:ring-2 focus:ring-green-500 bg-white ${
-                errors.branchName ? "border-red-500" : "border-gray-300"
+                errors.branchName && touched.branchName ? "border-red-500" : "border-gray-300"
               }`}
               required
             >
@@ -340,9 +406,8 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
                 </option>
               ))}
             </select>
-            {errors.branchName && <p className="text-sm text-red-500">{errors.branchName}</p>}
+            {errors.branchName && touched.branchName && <p className="text-sm text-red-500">{errors.branchName}</p>}
           </div>
-         
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-600">Account Name</label>
@@ -352,11 +417,11 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
               value={formData.accountName}
               onChange={(e) => handleInputChange("accountName", e.target.value)}
               className={`w-full h-12 px-3 border rounded-lg focus:ring-2 focus:ring-green-500 ${
-                errors.accountName ? "border-red-500" : "border-gray-300"
+                errors.accountName && touched.accountName ? "border-red-500" : "border-gray-300"
               }`}
               required
             />
-            {errors.accountName && <p className="text-sm text-red-500">{errors.accountName}</p>}
+            {errors.accountName && touched.accountName && <p className="text-sm text-red-500">{errors.accountName}</p>}
           </div>
 
           <div className="space-y-2">
@@ -367,11 +432,13 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
               value={formData.accountNumber}
               onChange={(e) => handleInputChange("accountNumber", e.target.value.replace(/\D/g, ""))}
               className={`w-full h-12 px-3 border rounded-lg focus:ring-2 focus:ring-green-500 ${
-                errors.accountNumber ? "border-red-500" : "border-gray-300"
+                errors.accountNumber && touched.accountNumber ? "border-red-500" : "border-gray-300"
               }`}
               required
             />
-            {errors.accountNumber && <p className="text-sm text-red-500">{errors.accountNumber}</p>}
+            {errors.accountNumber && touched.accountNumber && (
+              <p className="text-sm text-red-500">{errors.accountNumber}</p>
+            )}
           </div>
         </div>
 
@@ -379,7 +446,7 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
           <label className="text-sm font-medium text-gray-600">Proof of Bank Account</label>
           <div
             className={`border-2 border-dashed rounded-lg p-6 ${
-              errors.proofOfBankAccount ? "border-red-500 bg-red-50" : "border-gray-300"
+              errors.proofOfBankAccount && touched.proofOfBankAccount ? "border-red-500 bg-red-50" : "border-gray-300"
             }`}
           >
             {formData.proofOfBankAccount ? (
@@ -419,7 +486,9 @@ function KYCFormComponent({ onBack, onComplete }: { onBack: () => void; onComple
               </div>
             )}
           </div>
-          {errors.proofOfBankAccount && <p className="text-sm text-red-500">{errors.proofOfBankAccount}</p>}
+          {errors.proofOfBankAccount && touched.proofOfBankAccount && (
+            <p className="text-sm text-red-500">{errors.proofOfBankAccount}</p>
+          )}
         </div>
 
         <div className="flex justify-end gap-4 pt-6">
