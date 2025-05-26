@@ -63,7 +63,7 @@ export default function PartnerOnboardingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
-      {/* Left Sidebar */}
+
       <div className="w-64 bg-slate-800 text-white flex-shrink-0">
         <div className="p-6">
           <h1 className="text-lg font-bold mb-8">OP-PARTNER MANAGEMENT</h1>
