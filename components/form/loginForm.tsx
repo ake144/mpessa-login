@@ -130,10 +130,10 @@ export default function MPesaLoginPage() {
      <Header   />
       <main className="w-full  mx-auto py-9">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className=" rounded-lg  p-8 lg:p-12">
+          <div className=" pl-3 rounded-lg  p-8 lg:p-12">
             <div className="mb-8">
-              <h1 className=" font-bold text-gray-500  text-4xl  mb-4">M-PESA Acquisition Portal</h1>
-              <p className="text-gray-600 leading-relaxed">
+              <h1 className=" font-bold   text-4xl  mb-4">M-PESA Acquisition Portal</h1>
+              <p className="text-gray-700  leading-relaxed">
                 Welcome to M-PESA world of convenience! This Portal provides an efficient way to access and manage your
                 sales.
               </p>
